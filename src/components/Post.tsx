@@ -12,15 +12,15 @@ interface Author {
   avatarUrl: string
 }
 
-interface Content {
-  type: 'paragraph' | 'link'
+interface ContentProps {
+  typeTag: string
   content: string
 }
 
 interface PostProps {
   author: Author
   publishedAt: Date
-  content: Content[]
+  content: ContentProps[]
 }
 
 export function Post({ author, publishedAt, content }: PostProps) {
@@ -79,9 +79,9 @@ export function Post({ author, publishedAt, content }: PostProps) {
 
       <div className={styles.content}>
         {content.map(line => {
-          if (line.type === 'paragraph') {
+          if (line.typeTag === 'paragraph') {
             return (<p key={line.content}>{line.content}</p>)
-          } else if (line.type === 'link') {
+          } else if (line.typeTag === 'link') {
             return (<p key={line.content}><a href='#'>{line.content}</a></p>)
           }
         })}
